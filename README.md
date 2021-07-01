@@ -25,7 +25,7 @@ It's possible to run the application together with the PostgreSQL database in a 
 
 The running application should also have Swagger documentation available on `localhost:8080/api-docs` endpoint.
 
-Postman collection `Cleevio.postman_collection.json` is included in the root directory for testing purposes.
+Postman collection `cleevio-test-requests.http` is included in the root directory for testing purposes.
 
 Circle CI is added is hooked to the project for CI purposes.
 
