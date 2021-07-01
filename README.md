@@ -15,8 +15,8 @@ It's possible to run the application together with the PostgreSQL database in a 
 
 # How to run the application
 
-1. Inside of the directory `watches.eshop` run the `./gradlew dockerBuildImage` command.
-2. Go back to the root directory of the project and run `docker-compose up`
+1. Inside the root directory of the project run the `./gradlew dockerBuildImage` command.
+2. Then run command `docker-compose up`
      * Application should now be exposed on `localhost:8080`
      * DB should be running on `localhost:5432`
        with credentials set to username: `postgres` and password set to: `welcome1`
