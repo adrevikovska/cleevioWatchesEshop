@@ -193,16 +193,6 @@ class WatchControllerTest {
     }
 
     @Test
-    void createWatchWithPut() throws Exception {
-        WatchDTO updatedWatchDTO = createWatchDTO("Prime", 250, "Watch", BASE_64_IMAGE);
-        when(watchService.saveWatch(any())).thenReturn(updatedWatchDTO);
-        ResultActions actions = getPerform(mockMvc, put(WATCH_URL_TEMPLATE, 1L), asJsonString(updatedWatchDTO))
-                .andExpect(status().isCreated());
-        assertWatchDTO(actions, MediaType.APPLICATION_JSON, "Prime", 250, "Watch", BASE_64_IMAGE);
-        verify(watchService).getWatchById(eq(1L));
-    }
-
-    @Test
     void invalidTitle() throws Exception {
         ObjectNode watch = TestUtils.createWatch();
         watch.put("title", "   ");
@@ -267,6 +257,14 @@ class WatchControllerTest {
     @Test
     void getWatchThatDoesntExist() throws Exception {
         mockMvc.perform(get(WATCH_URL_TEMPLATE, 1L).accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+        verify(watchService).getWatchById(eq(1L));
+    }
+
+    @Test
+    void updateWatchThatDoesntExist() throws Exception {
+        WatchDTO updatedWatchDTO = createWatchDTO("Prime", 250, "Watch", BASE_64_IMAGE);
+        getPerform(mockMvc, put(WATCH_URL_TEMPLATE, 1L), asJsonString(updatedWatchDTO))
                 .andExpect(status().isNotFound());
         verify(watchService).getWatchById(eq(1L));
     }

@@ -11,6 +11,7 @@ import com.cleevio.task.watches.eshop.service.WatchService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,12 +34,13 @@ public class WatchServiceImpl implements WatchService {
         return watchMapper.watchToWatchDTO(watchRepository.findById(id).orElse(null));
     }
 
+    @Transactional
     @Override
     public WatchDTO saveWatch(WatchDTO watchDTO) {
         WatchDTO createdWatch = watchMapper.watchToWatchDTO(
                 watchRepository.save(watchMapper.watchDTOToWatch(watchDTO))
         );
-        log.debug("Watch with id {} was successfully created.", createdWatch.getId());
+        log.debug("Watch with id {} was successfully created or updated.", createdWatch.getId());
         return createdWatch;
     }
 

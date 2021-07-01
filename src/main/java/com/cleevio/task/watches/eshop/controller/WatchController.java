@@ -5,6 +5,7 @@
 package com.cleevio.task.watches.eshop.controller;
 
 import com.cleevio.task.watches.eshop.dto.WatchDTO;
+import com.cleevio.task.watches.eshop.dto.WatchDTOOpenApi;
 import com.cleevio.task.watches.eshop.service.PatchService;
 import com.cleevio.task.watches.eshop.service.WatchService;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
@@ -21,7 +22,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -51,8 +51,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
                 version = "1.0",
                 description = "Overview of Watch Eshop REST API resources.",
                 contact = @Contact(
-                        // TODO: Url of github repository
-                        url = "",
+                        url = "https://github.com/adrevikovska",
                         name = "Anna Drevikovska",
                         email = "anna.drevikovska@gmail.com"
                 )
@@ -93,6 +92,12 @@ public class WatchController {
     }
 
     @Operation(summary = "Create a new watch.")
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(content = {
+            @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = WatchDTOOpenApi.class)),
+            @Content(mediaType = MediaType.APPLICATION_XML_VALUE,
+                    schema = @Schema(implementation = WatchDTOOpenApi.class))
+    })
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Watch was successfully created."),
             @ApiResponse(responseCode = "400", description = "Invalid watch was provided.", content = @Content)
@@ -105,31 +110,36 @@ public class WatchController {
         return getWatchDTOWithLinks(newWatchDTO.getId(), newWatchDTO);
     }
 
-    @Operation(summary = "Update or create watch by id.")
+    @Operation(summary = "Update watch by id.")
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(content = {
+            @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @Schema(implementation = WatchDTOOpenApi.class)),
+            @Content(mediaType = MediaType.APPLICATION_XML_VALUE,
+                    schema = @Schema(implementation = WatchDTOOpenApi.class))
+    })
     @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "Watch was successfully created."),
             @ApiResponse(responseCode = "200", description = "Watch was successfully updated."),
-            @ApiResponse(responseCode = "400", description = "Invalid watch or id parameter was provided.",
+            @ApiResponse(responseCode = "404", description = "Watch with provided id doesn't exist.",
                     content = @Content)
     })
     @PutMapping(value = "{id}", consumes = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE },
             produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-    public ResponseEntity<WatchDTO> updateWatch(@Parameter(description = "Id of the watch to be updated or created.")
-                                                    @PathVariable Long id,
-                                                @RequestBody @Valid @NotNull WatchDTO watchDTO) {
+    @ResponseStatus(HttpStatus.OK)
+    public WatchDTO updateWatch(@Parameter(description = "Id of the watch to be updated or created.")
+                                    @PathVariable Long id,
+                                @RequestBody @Valid @NotNull WatchDTO watchDTO) {
         if (watchDTO.getId() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Watch id must not be null.");
         }
         checkWatchID(id, watchDTO.getId());
-        return (watchService.getWatchById(id) == null)
-                ? new ResponseEntity<>(getWatchDTOWithLinks(id, watchService.saveWatch(watchDTO)), HttpStatus.CREATED)
-                : new ResponseEntity<>(getWatchDTOWithLinks(id, watchService.saveWatch(watchDTO)), HttpStatus.OK);
+        mustExist(watchService.getWatchById(id), id);
+        return getWatchDTOWithLinks(id, watchService.saveWatch(watchDTO));
     }
 
     @Operation(summary = "Update watch by id.")
     @io.swagger.v3.oas.annotations.parameters.RequestBody(content = {
-            @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = WatchDTO.class)),
-            @Content(mediaType = MediaType.APPLICATION_XML_VALUE, schema = @Schema(implementation = WatchDTO.class))
+            @Content(mediaType = "application/merge-patch+json",
+                    schema = @Schema(implementation = WatchDTOOpenApi.class)),
     })
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Watch was successfully updated."),

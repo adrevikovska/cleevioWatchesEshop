@@ -1,0 +1,117 @@
+POST http://localhost:8080/api/v1/watches
+Content-Type: application/json
+
+{
+  "title": "Prim",
+  "price": 250000,
+  "description": "A watch with a water fountain picture",
+  "fountain": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAn/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAgP/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwChYAKv/9k="
+}
+
+### Create new watch
+
+GET http://localhost:8080/api/v1/watches
+Accept: application/json
+
+### Retrieve all watches
+
+GET http://localhost:8080/api/v1/watches/1
+Accept: application/json
+
+### Retrieve watch by id
+
+PUT http://localhost:8080/api/v1/watches/1
+Content-Type: application/json
+
+{
+  "id": "1",
+  "title": "Prime",
+  "price": 250,
+  "description": "A watch with a water fountain picture",
+  "fountain": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAn/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAgP/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwChYAKv/9k="
+}
+
+### Update watch by id
+
+PATCH http://localhost:8080/api/v1/watches/1
+Content-Type: application/merge-patch+json
+
+{
+  "fountain": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QA/4ePzL8AAAAHdElNRQflBh4RKSGgELNvAAAAC0lEQVQI12Pg0wIAAEkAOXq0VaMAAAAldEVYdGRhdGU6Y3JlYXRlADIwMjEtMDYtMzBUMTc6NDE6MzMrMDA6MDDV8rBJAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDIxLTA2LTMwVDE3OjQxOjMzKzAwOjAwpK8I9QAAAABJRU5ErkJggg=="
+}
+
+### Patch watch by id
+
+DELETE http://localhost:8080/api/v1/watches/1
+
+### Delete watch by id
+
+POST http://localhost:8080/api/v1/watches
+Content-Type: application/xml
+Accept: application/xml
+
+<watch>
+    <title>Prim</title>
+    <price>250000</price>
+    <description>A watch with a water fountain picture</description>
+    <fountain>/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAn/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAgP/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwChYAKv/9k=</fountain>
+</watch>
+
+### Create watch with XML request
+
+GET http://localhost:8080/api/v1/watches/2
+Accept: application/xml
+
+### Get watch by id and accept XML
+
+PUT http://localhost:8080/api/v1/watches/2
+Content-Type: application/xml
+Accept: application/xml
+
+<watch>
+    <id>2</id>
+    <title>Prim</title>
+    <price>250000</price>
+    <description>A watch with a water fountain picture</description>
+    <fountain>/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAn/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAgP/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwChYAKv/9k=</fountain>
+</watch>
+
+### Update watch by id and accept XML
+
+PATCH http://localhost:8080/api/v1/watches/2
+Content-Type: application/merge-patch+json
+Accept: application/xml
+
+{
+  "description": "Fountain watch"
+}
+
+### Patch watch by id and accept XML
+
+DELETE http://localhost:8080/api/v1/watches/3
+
+### Delete watch by id that doesn't exist
+
+POST http://localhost:8080/api/v1/watches
+Content-Type: application/json
+
+{
+  "title": "    ",
+  "price": 250000,
+  "description": "Fountain watch",
+  "fountain": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAn/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAgP/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwChYAKv/9k="
+}
+
+### Bad request JSON
+
+POST http://localhost:8080/api/v1/watches
+Content-Type: application/xml
+
+<watch>
+    <title>Prim</title>
+    <price>0</price>
+    <description>Fountain watch</description>
+    <fountain>/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAn/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAgP/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwChYAKv/9k=</fountain>
+</watch>
+
+### Bad request XML
