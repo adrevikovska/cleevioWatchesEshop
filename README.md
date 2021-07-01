@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/adrevikovska/cleevioWatchesEshop.svg?style=shield&circle-token=135bbaab6690e0bacea43c96efdfd00be88c225c)](https://circleci.com/gh/adrevikovska/cleevioWatchesEshop)
+
 # Cleevio Watches Eshop
 Hello! Welcome to my implementation of the Cleevio backend interview task for Watches Eshop.
 
@@ -24,5 +26,7 @@ It's possible to run the application together with the PostgreSQL database in a 
 The running application should also have Swagger documentation available on `localhost:8080/api-docs` endpoint.
 
 Postman collection `Cleevio.postman_collection.json` is included in the root directory for testing purposes.
+
+Circle CI is added is hooked to the project for CI purposes.
 
 Thank you and enjoy :slightly_smiling_face:!
