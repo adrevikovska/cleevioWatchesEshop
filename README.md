@@ -27,4 +27,6 @@ The running application should also have Swagger documentation available on `loc
 
 Postman collection `Cleevio.postman_collection.json` is included in the root directory for testing purposes.
 
+Circle CI is added is hooked to the project for CI purposes.
+
 Thank you and enjoy :slightly_smiling_face:!
