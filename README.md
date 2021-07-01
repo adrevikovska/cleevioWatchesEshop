@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/adrevikovska/cleevioWatchesEshop.svg?style=shield&circle-token=135bbaab6690e0bacea43c96efdfd00be88c225c)](https://circleci.com/gh/adrevikovska/cleevioWatchesEshop)
+
 # Cleevio Watches Eshop
 Hello! Welcome to my implementation of the Cleevio backend interview task for Watches Eshop.
 
