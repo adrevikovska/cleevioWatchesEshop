@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  app-server:
+    image: com.cleevio.task/watches.eshop:0.0.1
+    container_name: app-server
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: welcome1
+    depends_on:
+      - db
+    networks:
+      - backend
+  db:
+    image: postgres
+    container_name: db
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: welcome1
+      POSTGRES_DB: postgres_db
+    volumes:
+      - database-data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+volumes:
+  app-server:
+  db:
+  database-data:
+
+networks:
+  backend:
