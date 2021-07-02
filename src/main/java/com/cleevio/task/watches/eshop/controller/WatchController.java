@@ -119,6 +119,8 @@ public class WatchController {
     })
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Watch was successfully updated."),
+            @ApiResponse(responseCode = "400", description = "Invalid watch or id parameter was provided.",
+                    content = @Content),
             @ApiResponse(responseCode = "404", description = "Watch with provided id doesn't exist.",
                     content = @Content)
     })
